@@ -1,4 +1,6 @@
-This blog post documents the process of creating a labelled map of all AFP office locations in France using QGIS and GeoJSON.
+# AFP office map illustration
+
+This blog post documents the process of creating a [labelled map](images/Final-map-AFP-France.png) of all AFP office locations in France using [QGIS](https://www.qgis.org), [GeoJSON](https://geojson.org/), and network request inspection tools.
 
 ## Finding the office data
 
