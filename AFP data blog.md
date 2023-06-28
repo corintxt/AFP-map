@@ -1,5 +1,4 @@
-
-This guide is a step by 
+This blog post documents the process of creating a labelled map of all AFP office locations in France using QGIS and GeoJSON.
 
 ## Finding the office data
 
@@ -12,16 +11,17 @@ We want to create a custom map of these office locations using QGIS, so first, w
 
 If we open the browser console and check the `Network` tab, we can see all of the network requests made by this page. Filtering by type `XHR`, we can find requests where the browser is using the `XMLHttpRequest` protocol to communicate with a server and receive a JSON file, which is the format that the list of office locations will be in.
 
-Sure enough, when we filter by XHR, we see that a JSON file is being requested from the URL `afp.com/en/afp/map/getoffice/427`, which looks like an API endpoint to get a list of offices.
+Sure enough, when we filter by XHR, we see that a JSON file is being requested from the URL `afp.com/en/afp/map/getoffice/427`, which looks like an API endpoint to get a list of offices:
 
 ![AFP network requests](images/AFP_network_requests.png)
+
 We can confirm this by this visiting the URL directly in a browser, which gives us a JSON response with a list of offices.
 
 ![AFP office JSON](images/AFP_office_JSON.png)
 
 ### Converting to GeoJSON
 
-So, we want to take the list of offices and load it into QGIS, but to do this, we need to convert the JSON into GeoJSON format.
+So, we want to take the list of offices and load it into QGIS, but to do this we need to convert the JSON into GeoJSON format.
 
 The specification page at [geojson.org](https://geojson.org/) gives the following reference example:
 
@@ -40,7 +40,7 @@ The specification page at [geojson.org](https://geojson.org/) gives the followin
 
 From this example, we can infer that each office needs to be stored as a `type: Feature` with the location name and its latitude-longitude coordinates. By further reading the GeoJSON specification, we learn that all of the offices together should be grouped as a feature collection.
 
-We can do this with the following Python script:
+We can do this by writing a Python script:
 ```python
 import json
 import requests  
