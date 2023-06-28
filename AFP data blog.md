@@ -7,17 +7,17 @@ The [AFP in the world](https://www.afp.com/en/agency/about/afp-world) page lists
 
 Clicking **FRANCE** on the quick access tab shows us the 18 office locations in that country.
 
-![[AFP_offices_France.png]]
+![[images/AFP_offices_France.png]]
 We want to create a custom map of these office locations using QGIS, so first, we need a list of all of the offices with location coordinates. We know that the Google Maps widget is loading a list of these office locations from somewhere, so we can look at the network requests made by the browser to try and find where this happens. 
 
 If we open the browser console and check the `Network` tab, we can see all of the network requests made by this page. Filtering by type `XHR`, we can find just the requests where the browser is using the `XMLHttpRequest` protocol to communicate with a server and receive a JSON file, which is the most likely format for the list of office locations to be in.
 
 Sure enough, when we filter by XHR, we see that a JSON file is being requested from the URL `afp.com/en/afp/map/getoffice/427`, which looks like an API endpoint to get a list of offices.
 
-![[AFP_network_requests.png]] 
+![[images/AFP_network_requests.png]] 
 We can confirm this by this visiting the URL directly in a browser, which gives us a JSON response with a list of offices.
 
-![[AFP_office_JSON.png]]
+![[images/AFP_office_JSON.png]]
 
 ### Converting to GeoJSON
 
@@ -92,22 +92,22 @@ To add the map tiles into QGIS we need to find the URL template for the map. The
 
 In QGIS, we right click "XYZ Tiles > New Connection" and paste in the tile URL. The Toner Background tile map can then be selected as the base of our project.
 
-![[Add-tiles.png]]
+![[images/Add-tiles.png]]
 
-![[Toner-background.png]]
+![[images/Toner-background.png]]
 We now have a map of the entire world, but ideally we'd like to highlight the borders of France. To do this we need a shapefile with France's administrative boundaries, which we can find at [Diva-GIS.org](http://www.diva-gis.org/gdata).
 
-![[France-border-download.png]]
+![[images/France-border-download.png]]
 After we have downloaded the shapefile and loaded it into QGIS, we can see a new layer with France's administrative borders, which is coloured green on the map.
 
-![[France-border-coloured.png]]
+![[images/France-border-coloured.png]]
 
 Now we're ready to add in the GeoJSON layer with the locations of all AFP offices in France. 
 
 By default, QGIS will add the coordinates to the map, but does not add any labels.
 
-![[Offices-no-labels.png]]If we right click the `AFP_France_offices` layer and select "Show labels," we can add the names of the offices to the map. We can also change the styling of the labels to match the blue AFP colour, and add a white outline to improve the legibility.
+![[images/Offices-no-labels.png]]If we right click the `AFP_France_offices` layer and select "Show labels," we can add the names of the offices to the map. We can also change the styling of the labels to match the blue AFP colour, and add a white outline to improve the legibility.
 
 Et voilà! We have now created our own custom map illustration showing all AFP office locations in France. 
 
-![[Final-map-AFP-France.png]]
+![[images/Final-map-AFP-France.png]]
