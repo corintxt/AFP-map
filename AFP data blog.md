@@ -7,17 +7,17 @@ The [AFP in the world](https://www.afp.com/en/agency/about/afp-world) page lists
 
 Clicking **FRANCE** on the quick access tab shows us the 18 office locations in that country.
 
-![[images/AFP_offices_France.png]]
+![AFP offices France](images/AFP_offices_France.png)
 We want to create a custom map of these office locations using QGIS, so first, we need a list of all of the offices with location coordinates. We know that the Google Maps widget is loading a list of these office locations from somewhere, so we can look at the network requests made by the browser to try and find where this happens. 
 
 If we open the browser console and check the `Network` tab, we can see all of the network requests made by this page. Filtering by type `XHR`, we can find just the requests where the browser is using the `XMLHttpRequest` protocol to communicate with a server and receive a JSON file, which is the most likely format for the list of office locations to be in.
 
 Sure enough, when we filter by XHR, we see that a JSON file is being requested from the URL `afp.com/en/afp/map/getoffice/427`, which looks like an API endpoint to get a list of offices.
 
-![[images/AFP_network_requests.png]] 
+![AFP network requests](images/AFP_network_requests.png)
 We can confirm this by this visiting the URL directly in a browser, which gives us a JSON response with a list of offices.
 
-![[images/AFP_office_JSON.png]]
+![AFP office JSON](images/AFP_office_JSON.png)
 
 ### Converting to GeoJSON
 
